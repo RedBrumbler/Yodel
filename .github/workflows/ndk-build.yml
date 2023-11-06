@@ -1,0 +1,35 @@
+name: NDK build
+
+on:
+  push:
+    - 'main'
+    - 'dev/**'
+    - 'feat/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          lfs: true
+
+      - uses: seanmiddleditch/gha-setup-ninja@v3
+
+      - name: Create ndkpath.txt
+        run: |
+          echo "$ANDROID_NDK_LATEST_HOME" > ${GITHUB_WORKSPACE}/ndkpath.txt
+          cat ${GITHUB_WORKSPACE}/ndkpath.txt
+
+      - name: build
+        run: pwsh ./scripts/build.ps1
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: libyodel.so
+          path: ./build/libyodel.so
+          if-no-files-found: error
