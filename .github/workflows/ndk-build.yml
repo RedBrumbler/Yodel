@@ -31,9 +31,19 @@ jobs:
           echo "$ANDROID_NDK_LATEST_HOME" > ${GITHUB_WORKSPACE}/ndkpath.txt
           cat ${GITHUB_WORKSPACE}/ndkpath.txt
 
+      - name: Setup qpm
+        uses: Fernthedev/qpm-action@main
+        with:
+          workflow_token: ${{ secrets.GITHUB_TOKEN }}
+          restore: true
+          cache: true
+          publish: false
+
       - name: Write version
         if: startsWith(github.ref, 'refs/tags/v')
-        run: echo "${GITHUB_REF#refs/tags/v}" > version.txt
+        run: |
+          qpm package edit --version "${GITHUB_REF#refs/tags/v}"
+          qpm restore
 
       - name: build
         run: pwsh ./scripts/build.ps1
@@ -49,5 +59,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
         with:
-          files: ./build/libr15.so
+          files: ./build/libyodel.so
           generate_release_notes: true

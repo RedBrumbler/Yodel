@@ -1,1 +1,5 @@
 build/
+extern/
+*.log
+*.txt
+!CMakeLists.txt
