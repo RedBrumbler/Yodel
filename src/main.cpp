@@ -89,13 +89,16 @@ MODLOADER_FUNC char const* modloader_get_libr15_path() {
 MODLOADER_FUNC void modloader_preload(JNIEnv* env, char const* appId, char const* modloaderPath,
                                       char const* modloaderSourcePath, char const* filesDir,
                                       char const* externalDir) noexcept {
-  LOG_INFO("modloader_preload called with:");
-  LOG_INFO("env:                  {}", fmt::ptr(env));
-  LOG_INFO("appId:                {}", appId);
-  LOG_INFO("modloaderPath:        {}", modloaderPath);
-  LOG_INFO("modloaderSourcePath:  {}", modloaderSourcePath);
-  LOG_INFO("filesDir:             {}", filesDir);
-  LOG_INFO("externalDir:          {}", externalDir);
+  LOG_INFO("Yodelaheehoo! Built from branch " GIT_BRANCH " ({:X}) modified: {} by user {}", GIT_COMMIT,
+           (bool)GIT_MODIFIED, GIT_USER);
+
+  LOG_DEBUG("modloader_preload called with:");
+  LOG_DEBUG("env:                  {}", fmt::ptr(env));
+  LOG_DEBUG("appId:                {}", appId);
+  LOG_DEBUG("modloaderPath:        {}", modloaderPath);
+  LOG_DEBUG("modloaderSourcePath:  {}", modloaderSourcePath);
+  LOG_DEBUG("filesDir:             {}", filesDir);
+  LOG_DEBUG("externalDir:          {}", externalDir);
 
   application_id = appId;
   modloader_path = modloaderPath;
@@ -115,9 +118,9 @@ MODLOADER_FUNC void modloader_preload(JNIEnv* env, char const* appId, char const
 }
 
 MODLOADER_FUNC void modloader_load(JNIEnv* env, char const* soDir) noexcept {
-  LOG_INFO("modloader_load called with:");
-  LOG_INFO("env:   {}", fmt::ptr(env));
-  LOG_INFO("soDir: {}", soDir);
+  LOG_DEBUG("modloader_load called with:");
+  LOG_DEBUG("env:   {}", fmt::ptr(env));
+  LOG_DEBUG("soDir: {}", soDir);
 
   // Copy over soDir
   libr15Path = soDir;
@@ -132,9 +135,9 @@ MODLOADER_FUNC void modloader_load(JNIEnv* env, char const* soDir) noexcept {
 }
 
 MODLOADER_FUNC void modloader_accept_r15_handle(JNIEnv* env, void* r15Handle) noexcept {
-  LOG_INFO("modloader_accept_r15_handle called with:");
-  LOG_INFO("env:        {}", fmt::ptr(env));
-  LOG_INFO("r15Handle:  {}", fmt::ptr(r15Handle));
+  LOG_DEBUG("modloader_accept_r15_handle called with:");
+  LOG_DEBUG("env:        {}", fmt::ptr(env));
+  LOG_DEBUG("r15Handle:  {}", fmt::ptr(r15Handle));
 
   modloader_r15_handle = r15Handle;
   if (failed) {
@@ -148,8 +151,8 @@ MODLOADER_FUNC void modloader_accept_r15_handle(JNIEnv* env, void* r15Handle) no
 }
 
 MODLOADER_FUNC void modloader_unload(JavaVM* vm) noexcept {
-  LOG_INFO("modloader_unload called with:");
-  LOG_INFO("vm:         {}", fmt::ptr(vm));
+  LOG_DEBUG("modloader_unload called with:");
+  LOG_DEBUG("vm:         {}", fmt::ptr(vm));
   if (failed) {
     LOG_FATAL("Not unloading mods because we failed!");
     return;
