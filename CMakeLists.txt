@@ -46,7 +46,6 @@ if (QUEST)
     target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${EXTERN_DIR}/includes)
     target_link_libraries(${CMAKE_PROJECT_NAME} log ${EXTERN_DIR}/libs/libcapstone.a)
     target_include_directories(${CMAKE_PROJECT_NAME} SYSTEM PRIVATE ${EXTERN_DIR}/includes/fmt/fmt/include)
-
 endif()
 
 if (WINDOWS)
