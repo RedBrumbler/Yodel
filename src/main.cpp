@@ -146,8 +146,9 @@ MODLOADER_FUNC void modloader_accept_r15_handle(JNIEnv* env, void* r15Handle) no
   }
   modloader::protect_all();
 
-  // TODO: some kind of hook to invoke a load call, possibly just do it here
-  // TODO: some kind of hook to invoke a late load call, possibly somewhere after components are loaded within echovr?
+  modloader::load_early_mods();
+  // TODO: make some kind of hook to invoke a late load call, possibly somewhere after components are loaded within
+  // echovr?
 }
 
 MODLOADER_FUNC void modloader_unload(JavaVM* vm) noexcept {
