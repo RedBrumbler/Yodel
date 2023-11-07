@@ -8,7 +8,7 @@ A (WIP) modloader specific to echovr for quest (possibly PC at some point?) insp
 
 # Installation/Usage
 
-This is a [Libr15Loader](https://github.com/RedBrumbler/Libr15Loader) compatible modloader. Thus it should be placed at: `/sdcard/ModData/<app ID>/Modloader/libsl2.so`.
+This is a [Libr15Loader](https://github.com/RedBrumbler/Libr15Loader) compatible modloader. Thus it should be placed at: `/sdcard/ModData/<app ID>/Modloader/libyodel.so`.
 This modloader has several call in points, and it performs a topological sort of all dependents that need to be loaded and loads them in turn.
 
 | | Libs | Early Mods | Mods |
