@@ -19,3 +19,4 @@ This modloader has several call in points, and it performs a topological sort of
 
 # Resources
  - Inspired by [scotland2](https://github.com/sc2ad/scotland2)
+ - Easier time patching with [EchoPatcher](https://github.com/Lauriethefish/EchoPatcher) by @Lauriethefish
